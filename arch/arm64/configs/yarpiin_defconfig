@@ -4509,6 +4509,7 @@ CONFIG_QMI_ENCDEC=y
 #
 
 CONFIG_ALUCARD_HOTPLUG=y
+CONFIG_ASMP=y
 
 #
 # Additional Settings
