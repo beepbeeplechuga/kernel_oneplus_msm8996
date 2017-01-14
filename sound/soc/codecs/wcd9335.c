@@ -13084,41 +13084,65 @@ static struct regulator *tasha_codec_find_ondemand_regulator(
 #ifdef CONFIG_SOUND_CONTROL
 static struct snd_soc_codec *sound_control_codec_ptr;
 
-static ssize_t headphone_gain_show(struct kobject *kobj,
+static ssize_t headphone_left_gain_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return snprintf(buf, PAGE_SIZE, "%d %d\n",
-		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_CTL),
-		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX2_RX_VOL_CTL)
+	return snprintf(buf, PAGE_SIZE, "%d\n",
+		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_CTL)
 	);
 }
 
-static ssize_t headphone_gain_store(struct kobject *kobj,
+static ssize_t headphone_left_gain_store(struct kobject *kobj,
 		struct kobj_attribute *attr, const char *buf, size_t count)
 {
 
-	int input_l, input_r;
+	int input_l;
 
-	sscanf(buf, "%d %d", &input_l, &input_r);
+	sscanf(buf, "%d", &input_l);
 
 	if (input_l < -84 || input_l > 20)
 		input_l = 0;
 
+	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_MIX_CTL, input_l);
+	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_CTL, input_l);
+
+	return count;
+}
+
+static struct kobj_attribute headphone_left_gain_attribute =
+	__ATTR(headphone_left_gain, 0664,
+		headphone_left_gain_show,
+		headphone_left_gain_store);
+
+static ssize_t headphone_right_gain_show(struct kobject *kobj,
+		struct kobj_attribute *attr, char *buf)
+{
+	return snprintf(buf, PAGE_SIZE, "%d\n",
+		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX2_RX_VOL_CTL)
+	);
+}
+
+static ssize_t headphone_right_gain_store(struct kobject *kobj,
+		struct kobj_attribute *attr, const char *buf, size_t count)
+{
+
+	int input_r;
+
+	sscanf(buf, "%d",&input_r);
+
 	if (input_r < -84 || input_r > 20)
 		input_r = 0;
 
-	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_MIX_CTL, input_l);
 	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX2_RX_VOL_MIX_CTL, input_r);
-	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_CTL, input_l);
 	snd_soc_write(sound_control_codec_ptr, WCD9335_CDC_RX2_RX_VOL_CTL, input_r);
 
 	return count;
 }
 
-static struct kobj_attribute headphone_gain_attribute =
-	__ATTR(headphone_gain, 0664,
-		headphone_gain_show,
-		headphone_gain_store);
+static struct kobj_attribute headphone_right_gain_attribute =
+	__ATTR(headphone_right_gain, 0664,
+		headphone_right_gain_show,
+		headphone_right_gain_store);
 
 static ssize_t mic_gain_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
@@ -13158,7 +13182,7 @@ static ssize_t speaker_gain_show(struct kobject *kobj,
 
 	value = snd_soc_read(tfa98xx_codec_ptr, TFA98XX_AUDIO_CTR);
 	value >>= 8;
-	vol = TO_FIXED(value) / -2;
+	vol = TO_FIXED(value) / 2;
 
 	return snprintf(buf, PAGE_SIZE, "%d\n", (int)vol);
 }
@@ -13191,7 +13215,8 @@ static struct kobj_attribute speaker_gain_attribute =
 		speaker_gain_store);
 
 static struct attribute *sound_control_attrs[] = {
-		&headphone_gain_attribute.attr,
+		&headphone_left_gain_attribute.attr,
+        &headphone_right_gain_attribute.attr,
 		&mic_gain_attribute.attr,
 		&speaker_gain_attribute.attr,
 		NULL,
