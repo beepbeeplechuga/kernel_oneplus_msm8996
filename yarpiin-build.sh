@@ -16,7 +16,7 @@ DEFCONFIG="yarpiin_defconfig"
 KERNEL_DIR="/home/slawek/Android/OP3/Yarpiin-Kernel-OP3-LOS"
 RESOURCE_DIR="$KERNEL_DIR/.."
 LAZYFLASHER_DIR="/home/slawek/Android/OP3/lazyflasherOP3"
-TOOLCHAIN_DIR="/home/slawek/Android/Toolchains/"
+TOOLCHAIN_DIR="/home/slawek/Android/Toolchains"
 
 # Kernel Details
 BASE_YARPIIN_VER="YARPIIN.OP3.LOS"
