@@ -1,8 +1,25 @@
 
 Project name: Yarpiin-Kernel-OP3-LOS
 
-08/02/2017
+08/02/16
 
+  * Squash msm: kgsl: misc fixes (bedalus) [f948ba1]
+  * usb: dwc3-msm: Remove indefinite wakeup (Sultanxda) [b60c94b]
+  * usb: dwc3-msm: Don't issue power supply change for invalid charger (Sultanxda) [b62dd008]
+  * yarpiin_defconfig: enable usb fast charge (Slawek) [fa2f465]
+  * drivers: misc: implement usb fast charge mode (engstk) [719a79e]
+  * lowmemorykiller: account for unevictable pages (Tim Murray) [0bb71d5]
+  * touchscreen: add -Ofast (Park Ju Hyung) [eaaa587]
+  * synaptics: add -Ofast (Park Ju Hyung) [c6ad5f8]
+  * autosmp: small tune and enable by default (Slawek) [09e30dc]
+  * sched/deadline: Avoid pointless __setscheduler() (Wanpeng Li) [c527112]
+  * sched/wait: Fix a kthread race with wait_woken() (Peter Zijlstra) [fc305e8]
+  * CRC off by default (Slawek) [12e0eb5]
+  * Remove logspam of various drivers (andip71) [4cf354e]
+  * tri_state_key: allow more key codes for extra modes (andip71) [b035784]
+  * tcp_cubic: do not set epoch_start in the future (Eric Dumazet) [65a0bfc]
+  * tcp_cubic: better follow cubic curve after idle period (Eric Dumazet) [e1ded45]
+  * bump to version 5 (Slawek) [e4c9a64]
   * kgsl: convert some workqueues to use kthreads (Tim Murray) [f68a46a]
   * BACKPORT: audit: consistently record PIDs with task_tgid_nr() (Paul Moore) [356c0ae]
   * UPSTREAM: fs/proc/kcore.c: Add bounce buffer for ktext data (Jiri Olsa) [0da08ec]
