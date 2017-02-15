@@ -1,7 +1,29 @@
 
 Project name: Yarpiin-Kernel-OP3-LOS
 
-08/02/16
+15/02/17
+
+  * dm crypt: fix free of bad values after tfm allocation failure (Eric Biggers) [8d31c6a]
+  * dm crypt: fix error with too large bios (Mikulas Patocka) [ec3a428]
+  * msm: kgsl: Get GPU snapshot if wait for global timestamp timeout (Hareesh Gundu) [8b0fc82]
+  * msm: kgsl: Change device-type memory mapping to Normal-NC (Rajesh Kemisetti) [51586b7]
+  * ion: Fix permissions on source file (Alex Naidis) [d7a3bb2]
+  * Stable GPU Overclock @652Mhz (whyorean) [16623e1]
+  * chill: Fix logic for reducing boost count with freq (Joe Maples) [188e3f6]
+  * chill: Allow any number >= 1 for boost count (Joe Maples) [48d45007]
+  * chill: Reset boost count on policy->min (Joe Maples) [ede88f1]
+  * chill: Decrease boost count alongside frequency (Joe Maples) [10808c2]
+  * chill: Simplify boost increment logic (Joe Maples) [24d82a4]
+  * chill: I'm secretly retarded (Joe Maples) [2a8dbaa]
+  * chill: Reset boost count at max regardless of whether we've boosted (Joe Maples) [89238e4]
+  * UPSTREAM: l2tp: fix racy SOCK_ZAPPED flag check in l2tp_ip{,6}_bind() (Guillaume Nault) [465cf1f]
+  * UPSTREAM: arm64: Allow hw watchpoint of length 3,5,6 and 7 (Pratyush Anand) [30eb801]
+  * BACKPORT: arm64: hw_breakpoint: Handle inexact watchpoint addresses (Pavel Labath) [d994fa3]
+  * UPSTREAM: arm64: Allow hw watchpoint at varied offset from base address (Pratyush Anand) [9431541]
+  * arm64: cache: change ARCH_DMA_MINALIGN and L1_CACHE_SHIFT values (Catalin Marinas) [e78a35d]
+  * arm64: lib: memory utilities optimization (Francisco Franco) [0c645bf]
+
+08/02/17
 
   * Squash msm: kgsl: misc fixes (bedalus) [f948ba1]
   * usb: dwc3-msm: Remove indefinite wakeup (Sultanxda) [b60c94b]
