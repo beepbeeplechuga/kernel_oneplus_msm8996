@@ -12,31 +12,31 @@ clear
 THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
 KERNEL="Image.gz-dtb"
 DTBIMAGE="dtb"
-DEFCONFIG="yarpiin_defconfig"
-KERNEL_DIR="/home/slawek/Android/OP3/Yarpiin-Kernel-OP3-LOS"
+DEFCONFIG="kroniccore_defconfig"
+KERNEL_DIR=`pwd`
 RESOURCE_DIR="$KERNEL_DIR/.."
-LAZYFLASHER_DIR="/home/slawek/Android/OP3/lazyflasherOP3"
-TOOLCHAIN_DIR="/home/slawek/Android/Toolchains"
+ANYKERNEL_DIR="${HOME}/oneplus3-anykernel"
+TOOLCHAIN_DIR="${HOME}/toolchain"
 
 # Kernel Details
-BASE_YARPIIN_VER="YARPIIN.OP3.LOS"
-VER=".006"
-YARPIIN_VER="$BASE_YARPIIN_VER$VER"
+BASE_KRONIC_VER="KronicCore.OP3.Unified"
+VER="."uber1
+KRONIC_VER="$BASE_KRONIC_VER$VER"
 
 # Vars
-export LOCALVERSION=-`echo $YARPIIN_VER`
-export CROSS_COMPILE="$TOOLCHAIN_DIR/aarch64-linux-android-6.x/bin/aarch64-linux-android-"
+export LOCALVERSION=-`echo $KRONIC_VER`
+export CROSS_COMPILE="$TOOLCHAIN_DIR/aarch64-linux-android-6.x-uber/bin/aarch64-linux-android-"
 export ARCH=arm64
 export SUBARCH=arm64
-export KBUILD_BUILD_USER=yarpiin
-export KBUILD_BUILD_HOST=kernel
+export KBUILD_BUILD_USER=Dabug123
+export KBUILD_BUILD_HOST=Derpbox
 
 # Paths
-REPACK_DIR="$LAZYFLASHER_DIR"
-PATCH_DIR="$LAZYFLASHER_DIR/ramdisk-patch"
-MODULES_DIR="$LAZYFLASHER_DIR/modules"
-ZIP_MOVE="/home/slawek/Android/OP3/Zip"
-ZIMAGE_DIR="$KERNEL_DIR/arch/arm64/boot"
+REPACK_DIR="$ANYKERNEL_DIR"
+PATCH_DIR="$ANYKERNEL_DIR/patch"
+MODULES_DIR="$ANYKERNEL_DIR/modules"
+ZIP_MOVE="${HOME}/kroniccore"
+ZIMAGE_DIR="${HOME}/kroniccore/arch/arm64/boot"
 
 # Functions
 function clean_all {
@@ -68,8 +68,8 @@ function make_modules {
 
 function make_zip {
 		cd $REPACK_DIR
-		zip -r9 `echo $YARPIIN_VER`.zip *
-		mv  `echo $YARPIIN_VER`.zip $ZIP_MOVE
+		zip -r9 `echo $KRONIC_VER`.zip *
+		mv  `echo $KRONIC_VER`.zip $ZIP_MOVE
 		cd $KERNEL_DIR
 }
 
@@ -77,18 +77,18 @@ function make_zip {
 DATE_START=$(date +"%s")
 
 echo -e "${green}"
-echo "YARPIIN Kernel Creation Script:"
+echo "Kronic Core Creation Script:"
 echo
 
 echo "---------------"
-echo "Kernel Version:"
+echo "Kronic Version:"
 echo "---------------"
 
-echo -e "${red}"; echo -e "${blink_red}"; echo "$YARPIIN_VER"; echo -e "${restore}";
+echo -e "${red}"; echo -e "${blink_red}"; echo "$KRONIC_VER"; echo -e "${restore}";
 
 echo -e "${green}"
 echo "-----------------"
-echo "Making YARPIIN Kernel:"
+echo "Making KC Kernel:"
 echo "-----------------"
 echo -e "${restore}"
 
