@@ -264,10 +264,6 @@ struct cpufreq_driver {
 	unsigned int	(*get)(unsigned int cpu);
 
 	/* optional */
-	unsigned int (*getavg)	(struct cpufreq_policy *policy,
-                            unsigned int cpu);
-
-	/* optional */
 	int		(*bios_limit)(int cpu, unsigned int *limit);
 
 	int		(*exit)(struct cpufreq_policy *policy);
@@ -485,8 +481,6 @@ int cpufreq_driver_target(struct cpufreq_policy *policy,
 int __cpufreq_driver_target(struct cpufreq_policy *policy,
 				   unsigned int target_freq,
 				   unsigned int relation);
-extern int __cpufreq_driver_getavg(struct cpufreq_policy *policy,
-                                   unsigned int cpu);
 int cpufreq_register_governor(struct cpufreq_governor *governor);
 void cpufreq_unregister_governor(struct cpufreq_governor *governor);
 
@@ -530,9 +524,6 @@ extern struct cpufreq_governor cpufreq_gov_impulse;
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_BIOSHOCK)
 extern struct cpufreq_governor cpufreq_gov_bioshock;
 #define CPUFREQ_DEFAULT_GOVERNOR        (&cpufreq_gov_bioshock)
-#elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_LIONHEART)
-extern struct cpufreq_governor cpufreq_gov_lionheart;
-#define CPUFREQ_DEFAULT_GOVERNOR 	(&cpufreq_gov_LIONHEART)
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_ZZMOOVE)
 extern struct cpufreq_governor cpufreq_gov_zzmoove;
 #define CPUFREQ_DEFAULT_GOVERNOR       (&cpufreq_gov_zzmoove)

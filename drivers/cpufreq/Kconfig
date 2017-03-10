@@ -101,12 +101,6 @@ config CPU_FREQ_DEFAULT_GOV_ONDEMAND
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.
 
-config CPU_FREQ_DEFAULT_GOV_LIONHEART
-            bool "lionheart"
-            select CPU_FREQ_GOV_LIONHEART
-            help
-              Use the CPUFreq governor 'lionheart' as default.
-
 config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	bool "conservative"
 	select CPU_FREQ_GOV_CONSERVATIVE
@@ -159,13 +153,6 @@ config CPU_FREQ_DEFAULT_GOV_LIONFISH
 	select CPU_FREQ_GOV_LIONFISH
 	help
 	  Use the CPUFreq governor 'lionfish' as default.
-
-config CPU_FREQ_DEFAULT_GOV_WHEATLEY
-	bool "wheatley"
-	select CPU_FREQ_GOV_WHEATLEY
-	select CPU_FREQ_GOV_PERFORMANCE
-	---help---
-	  Use the CPUFreq governor 'wheatley' as default.
 
 config CPU_FREQ_DEFAULT_GOV_DESPAIR
 	bool "despair"
@@ -285,13 +272,6 @@ config CPU_FREQ_GOV_ONDEMAND
 
 	  If in doubt, say N.
 
-config CPU_FREQ_GOV_LIONHEART
-           tristate "'lionheart' cpufreq governor"
-           depends on CPU_FREQ
-           help
-             lionheart' - a "smart" optimized governor!
-             If in doubt, say N.
-
 config CPU_FREQ_GOV_INTERACTIVE
 	tristate "'interactive' cpufreq policy governor"
 	help
@@ -395,10 +375,6 @@ config CPUFREQ_DT
 config CPU_FREQ_GOV_DYNAMIC_INTERACTIVE
 	tristate "'dynamic_interactive' cpufreq governor"
 	depends on CPU_FREQ			  	  
-
-config CPU_FREQ_GOV_WHEATLEY
-	tristate "'wheatley' cpufreq governor"
-	depends on CPU_FREQ
 
 config CPU_FREQ_GOV_DESPAIR
 	tristate "'despair' cpufreq governor"
