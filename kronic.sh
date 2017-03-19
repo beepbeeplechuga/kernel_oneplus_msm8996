@@ -20,7 +20,7 @@ TOOLCHAIN_DIR="${HOME}/toolchain"
 
 # Kernel Details
 BASE_KRONIC_VER="KronicCore.OP3.Unified"
-VER="."uber6.0
+VER="."rc3
 KRONIC_VER="$BASE_KRONIC_VER$VER"
 
 # Vars
