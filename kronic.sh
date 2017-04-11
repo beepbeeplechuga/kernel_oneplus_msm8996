@@ -20,7 +20,7 @@ TOOLCHAIN_DIR="${HOME}/toolchain"
 
 # Kernel Details
 BASE_KRONIC_VER="KronicCore.OP3.Unified"
-VER="."rc8.5
+VER="."stable1.1
 KRONIC_VER="$BASE_KRONIC_VER$VER"
 
 # Vars
