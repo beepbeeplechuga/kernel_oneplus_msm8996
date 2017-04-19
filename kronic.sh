@@ -20,12 +20,12 @@ TOOLCHAIN_DIR="${HOME}/toolchain"
 
 # Kernel Details
 BASE_KRONIC_VER="KronicCore.OP3.Unified"
-VER="."stable1.1
+VER="."stable3.8
 KRONIC_VER="$BASE_KRONIC_VER$VER"
 
 # Vars
 export LOCALVERSION=-`echo $KRONIC_VER`
-export CROSS_COMPILE="$TOOLCHAIN_DIR/aarch64-linux-android-6.3/bin/aarch64-linux-android-"
+export CROSS_COMPILE="$TOOLCHAIN_DIR/aarch64-linux-android-6.3.1/bin/aarch64-"
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER=Dabug123
