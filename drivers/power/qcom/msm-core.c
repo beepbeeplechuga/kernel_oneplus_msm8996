@@ -374,7 +374,7 @@ static int update_userspace_power(struct sched_params __user *argp)
 {
 	int i;
 	int ret;
-	int cpu;
+	int cpu = INT_MAX;
 	struct cpu_activity_info *node;
 	struct cpu_static_info *sp, *clear_sp;
 	int cpumask, cluster, mpidr;
@@ -517,7 +517,7 @@ static long msm_core_ioctl(struct file *file, unsigned int cmd,
 				node->sp->voltage,
 				sizeof(uint32_t) * node->sp->num_of_freqs);
 		if (ret)
-			break;
+			goto unlock;
 		for (i = 0; i < node->sp->num_of_freqs; i++) {
 			ret = copy_to_user((void __user *)&argp->freq[i],
 					&node->sp->table[i].frequency,

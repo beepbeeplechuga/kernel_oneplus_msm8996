@@ -1,4 +1,4 @@
-/* Copyright (c) 2014-2016, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014-2017, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -392,6 +392,7 @@ static int mdss_rotator_create_fence(struct mdss_rot_entry *entry)
 	sync_pt = sw_sync_pt_create(rot_timeline->timeline, val);
 	if (sync_pt == NULL) {
 		pr_err("cannot create sync point\n");
+		ret = -ENOMEM;
 		goto sync_pt_create_err;
 	}
 
@@ -736,11 +737,11 @@ static struct mdss_rot_hw_resource *mdss_rotator_hw_alloc(
 	hw->ctl->wb_type = MDSS_MDP_WB_CTL_TYPE_BLOCK;
 
 
-	if (hw->ctl->ops.start_fnc)
+	if (hw->ctl->ops.start_fnc) {
 		ret = hw->ctl->ops.start_fnc(hw->ctl);
-
-	if (ret)
-		goto error;
+		if (ret)
+			goto error;
+	}
 
 	if (pipe_id >= mdata->ndma_pipes)
 		goto error;
@@ -2059,10 +2060,12 @@ static int mdss_rotator_config_session(struct mdss_rot_mgr *mgr,
 		return ret;
 	}
 
+	mutex_lock(&mgr->lock);
 	perf = mdss_rotator_find_session(private, config.session_id);
 	if (!perf) {
 		pr_err("No session with id=%u could be found\n",
 			config.session_id);
+		mutex_unlock(&mgr->lock);
 		return -EINVAL;
 	}
 
@@ -2085,6 +2088,7 @@ static int mdss_rotator_config_session(struct mdss_rot_mgr *mgr,
 		config.output.format);
 done:
 	ATRACE_END(__func__);
+	mutex_unlock(&mgr->lock);
 	return ret;
 }
 
